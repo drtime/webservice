@@ -9,7 +9,7 @@ const hints_file = './hintsdb.json';
 const server = http.createServer(app);
 const io = require('socket.io').listen(server);
 
-createIfNotExist(hints_file, "{data: []}");
+createIfNotExist(hints_file, "{\"data\": []}");
 
 app.get('/', (req, res) => {
     res.json({
@@ -54,5 +54,5 @@ app.get('/realtime/hints', function(req, res){
 });
 
 server.listen(30101, () => {
-    console.log('Example app listening on port 30101!')
+    console.log('Webservice app listening on port 30101!')
 })
