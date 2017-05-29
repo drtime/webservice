@@ -30,7 +30,7 @@ app.post('/v1/hint', (req, res) => {
 
     hintlist.push({
         time: Math.floor(Date.now() / 1000),
-        hint: content
+        hint: content.trim()
     });
 
     jsonfile.writeFileSync(hints_file, {data: hintlist});
@@ -40,6 +40,12 @@ app.post('/v1/hint', (req, res) => {
     });
 
     io.emit("hint", {"content": content});
+});
+
+app.post('/v1/unlock/:id', (req, res) => {
+    const id = req.params.id;
+
+
 });
 
 app.get('/v1/hints', (req, res) => {
