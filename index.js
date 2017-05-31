@@ -49,6 +49,7 @@ app.post('/v1/unlock/:id', (req, res) => {
 });
 
 app.get('/v1/hints', (req, res) => {
+    console.log("Loading all hints")
     res.json({
         "success": true,
         "data": hintlist.reverse()
