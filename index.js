@@ -43,6 +43,7 @@ app.post('/v1/hint', (req, res) => {
 });
 
 app.get('/v1/hints', (req, res) => {
+    console.log("Loading all hints")
     res.json({
         "success": true,
         "data": hintlist
