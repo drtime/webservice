@@ -51,7 +51,7 @@ app.post('/v1/unlock/:id', (req, res) => {
 app.get('/v1/hints', (req, res) => {
     res.json({
         "success": true,
-        "data": hintlist
+        "data": hintlist.reverse()
     });
 });
 
