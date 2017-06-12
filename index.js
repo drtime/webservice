@@ -42,10 +42,8 @@ app.post('/v1/hint', (req, res) => {
     io.emit("hint", {"content": content});
 });
 
-app.post('/v1/unlock/:id', (req, res) => {
-    const id = req.params.id;
-
-
+app.post('/v1/reset', (req, res) => {
+    jsonfile.writeFileSync(hints_file, {data: []});
 });
 
 app.get('/v1/hints', (req, res) => {
