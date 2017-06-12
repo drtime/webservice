@@ -31,9 +31,11 @@ app.use(function(req, res, next) {
   next();
 });
 
-io.on('tijdperk', (data) => {
-    io.emit(data);
-})
+io.on('connection', function(socket){
+    socket.on('tijdperk', (data) => {
+        io.emit(data);
+    });
+});
 
 app.post('/v1/hint', (req, res) => {
     const content = req.body.content;
@@ -55,7 +57,7 @@ app.post('/v1/hint', (req, res) => {
 app.post('/v1/reset', (req, res) => {
     jsonfile.writeFileSync(hints_file, {data: []});
     hintlist = [];
-    
+
     res.json({
         "success": true
     });
