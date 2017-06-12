@@ -33,7 +33,7 @@ app.use(function(req, res, next) {
 
 io.on('connection', function(socket){
     socket.on('tijdperk', (data) => {
-        io.emit(data);
+        io.emit('tijdperk', data);
     });
 });
 
