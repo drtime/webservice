@@ -3,14 +3,62 @@
     <head>
         <meta charset="utf-8">
         <title>Socket.io test</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     </head>
     <body>
+        <div class="container">
+            <h1>Escaperoom Control Panel</h1>
+
+            <div class="form-inline">
+                <label for="selectTijdperk"></label>
+                <select class="form-control" id="selectTijdperk">
+                    <option value="0" selected>
+                        Prehistorie
+                    </option>
+                    <option value="1">
+                        Middeleeuwen
+                    </option>
+                    <option value="2">
+                        Industrie
+                    </option>
+                </select>
+                <button type="submit" class="btn btn-primary" id="selectTijdperkBtn">Verstuur naar spelers</button>
+            </div>
+
+            <hr/>
+
+            <div class="form-group row">
+                <label for="hintText" class="col-2 col-form-label">Hint</label>
+                <div class="col-10">
+                    <input class="form-control" type="text" placeholder="Stop fucking it up" id="hintText">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="hintBtn">Verstuur naar spelers</button>
+
+        </div>
+
         <script src="/socket.io/socket.io.js"></script>
         <script>
             var socket = io();
             socket.on('hint', function(msg){
                 alert(msg.content);
             });
+
+            document.getElementById('selectTijdperkBtn').addEventListener('click', (e) => {
+                var select = document.getElementById('selectTijdperk');
+                select = select.options[select.selectedIndex];
+
+                console.log(select)
+                socket.emit('tijdperk', {index: parseInt(select.value)});
+            })
+
+            document.getElementById('hintBtn').addEventListener('click', (e) => {
+                $.ajax({ method: "POST", url: "http://vps1.nickforall.nl:30101/v1/hint", data: { content: document.getElementById("hintText").value } });
+                document.getElementById("hintText").value = "";
+            })
         </script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     </body>
 </html>

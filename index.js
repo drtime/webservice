@@ -25,6 +25,16 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+io.on('tijdperk', (data) => {
+    io.emit(data);
+})
+
 app.post('/v1/hint', (req, res) => {
     const content = req.body.content;
 
