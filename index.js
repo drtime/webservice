@@ -44,6 +44,9 @@ app.post('/v1/hint', (req, res) => {
 
 app.post('/v1/reset', (req, res) => {
     jsonfile.writeFileSync(hints_file, {data: []});
+    res.json({
+        "success": true
+    });
 });
 
 app.get('/v1/hints', (req, res) => {
