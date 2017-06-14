@@ -40,15 +40,11 @@
         <script src="/socket.io/socket.io.js"></script>
         <script>
             var socket = io();
-            socket.on('hint', function(msg){
-                alert(msg.content);
-            });
 
             document.getElementById('selectTijdperkBtn').addEventListener('click', (e) => {
                 var select = document.getElementById('selectTijdperk');
                 select = select.options[select.selectedIndex];
 
-                console.log(select)
                 socket.emit('tijdperk', {index: parseInt(select.value)});
             })
 

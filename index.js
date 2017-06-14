@@ -75,6 +75,10 @@ app.get('/realtime/hints', function(req, res){
     res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/realtime/music', function(req, res){
+    res.sendFile(__dirname + '/music.html');
+});
+
 server.listen(30101, () => {
     console.log('Webservice app listening on port 30101!')
 })
